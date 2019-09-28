@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+<div class="input-group">
+    <div class="p-5 bg-white shadow rounded-lg"><img src="https://image.flaticon.com/icons/svg/338/338864.svg" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+        <h6 class="text-center mb-4 text-muted">
+            Upload CSV File
+        </h6>
+
+        <form method="post" th:action="@{/upload}" enctype="multipart/form-data" id="fileUploadForm">
+
+            <div class="form-row">
+                <div class="col-md-5 mb-2">
+                   <input type="file" name="file" id="pictures" class="fileUpload"/>
+                </div>
+            </div>
+            <input type="submit" value="Submit" id="submitButton" class="btn btn-secondary"/>
+        </form>
+
+    </div>
+</div>
+</div>
+</body>
+</html>
