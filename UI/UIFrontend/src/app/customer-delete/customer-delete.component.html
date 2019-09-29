@@ -1,0 +1,19 @@
+<mat-card>
+    <div [hidden]="submitted" style="width: 400px;">
+        <mat-card-title>
+           Are you Sure You want to Delete
+        </mat-card-title>
+        <mat-card-content>
+        <form #customerForm="ngForm" (ngSubmit)="deleteCustomer()">
+            <mat-card-actions>         
+                <button mat-raised-button color="warn"  type="submit">Yes</button>
+                <button mat-raised-button  color="primary" routerLink="/">No</button>         
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+    </div>
+    <div [hidden]="!submitted">
+        <h4>Customer Deleted Successfully!</h4>
+        <a mat-raised-button color="warn" routerLink="/">Back</a>
+    </div>
+</mat-card>

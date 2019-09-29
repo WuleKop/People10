@@ -1,0 +1,90 @@
+<mat-card class="example-card"> 
+    <mat-card-actions>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Search Candidate" [formControl]='searchControl'>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Parameter</mat-label>
+                <mat-select [formControl]='paramControl'>
+                    <mat-option *ngFor="let search of searchOptions" [value]="search">
+                        {{search}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <p>
+                <button mat-raised-button color="primary" (click)='getMatchingCustomers()'>Search Customers</button>
+            </p>
+        </div>
+    </mat-card-actions>
+</mat-card>
+<br>
+<mat-card *ngIf="filterdCustomers" class="table-card">
+    <table mat-table [dataSource]="filterdCustomers" class="mat-elevation-z8">
+        displayedColumns: string[] = ['id', 'first_name',
+        'last_name','email','longitude','latitude','ip','created_at','updated_at'];
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="first_name">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_name">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="longitude">
+            <th mat-header-cell *matHeaderCellDef> Longitude </th>
+            <td mat-cell *matCellDef="let element"> {{element.longitude}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="latitude">
+            <th mat-header-cell *matHeaderCellDef> Latitude </th>
+            <td mat-cell *matCellDef="let element"> {{element.latitude}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ip">
+            <th mat-header-cell *matHeaderCellDef> IP </th>
+            <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef> Created At </th>
+            <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updated_at">
+            <th mat-header-cell *matHeaderCellDef> Updated At </th>
+            <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+        </ng-container>  
+          
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-raised-button color="primary" [routerLink]="['/update', element.id]">Update</button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-raised-button color="warn" [routerLink]="['/delete', element.id]">Delete</button>
+            </td>
+          </ng-container>
+  
+       
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-card>

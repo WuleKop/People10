@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../customer';
-import * as customer_json  from '../../assets/customers.json';
 import { FormControl } from '@angular/forms';
-
+import { Customer } from '../customer';
+import { CustomerService } from '../customer.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'app-customer-search',
+  templateUrl: './customer-search.component.html',
+  styleUrls: ['./customer-search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class CustomerSearchComponent implements OnInit {
 
   searchOptions: string[] = ['id','First Name', 'Last Name','Email'];
   searchControl=new FormControl();
   paramControl=new FormControl();
-  displayedColumns: string[] = ['id', 'first_name', 'last_name','email','longitude','latitude','ip','created_at','updated_at']; 
+  displayedColumns: string[] = ['id', 'first_name', 'last_name','email','longitude',
+  'latitude','ip','created_at','updated_at','update','delete']; 
   
-  customers : Customer[] = customer_json.default;
+  customers : Customer[];
   filterdCustomers : Customer[];
   param:string;
 
-  constructor() { }
+  constructor(private cusomerService:CustomerService) { }
 
-  ngOnInit() {   
-      
+  ngOnInit() {
+    this.cusomerService.getAllCustomers().subscribe(data =>
+      this.customers=data);      
   }
   getMatchingCustomers(){
     this.param=this.paramControl.value;
